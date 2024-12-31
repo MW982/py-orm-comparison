@@ -26,10 +26,16 @@ class Country(models.Model):
         default=FRESHMAN,
     )
 
+    class Meta:
+        db_table = "country"
+
 
 class Area(models.Model):
     name = models.CharField(max_length=200)
     country = models.ForeignKey("testmodels.Country", on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = "area"
 
 
 class Citizen(models.Model):
@@ -40,6 +46,12 @@ class Citizen(models.Model):
         "testmodels.GovernmentFacility", on_delete=models.CASCADE
     )
 
+    class Meta:
+        db_table = "citizen"
+
 
 class GovernmentFacility(models.Model):
     area = models.ForeignKey("testmodels.Area", on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = "government_facility"
