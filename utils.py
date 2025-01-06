@@ -1,5 +1,17 @@
 class BaseQueries:
-    def select_x_and_y(self):
+    def select_country_all(self) -> str:
+        raise NotImplementedError
+
+    def select_country_id_and_name(self):
+        raise NotImplementedError
+
+    def select_with_where(self):
+        raise NotImplementedError
+
+    def select_with_join(self):
+        raise NotImplementedError
+
+    def group_by(self):
         raise NotImplementedError
 
 

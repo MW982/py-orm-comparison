@@ -10,7 +10,6 @@ from utils import BaseQueries, BaseQueryAnalyzer
  1b. Filtered by x
  1c. self joins
  1d. Group by 
- 1e. distinct
 2. Create x column
  2a. Create with a new joined row
  2b. Bulk creation
@@ -25,21 +24,11 @@ from utils import BaseQueries, BaseQueryAnalyzer
 """
 
 
-# @session
-# def main(*args, **kwargs):
-#    session = args[0]
-#    print("x--------------------------------")
-#    # print(session.query(Country))
-#    # print("HI", args, kwargs)
-#    query = select(Country)
-#    print(session.execute(query))
-
-
 def run_all_tests():
     orm_analyzers_mapping: dict[type[BaseQueries], type[BaseQueryAnalyzer]] = {
         SQLAlchemyQueries: SQLAlchemyAnalyzer,
-        #        PeeweeQueries: PeeweeAnalyzer,
-        #        DjangoQueries: DjangoAnalyzer,
+        # PeeweeQueries: PeeweeAnalyzer,
+        DjangoQueries: DjangoAnalyzer,
     }
     orms = orm_analyzers_mapping.keys()
     tests = [
@@ -50,13 +39,20 @@ def run_all_tests():
 
     for orm in orms:
         orm_instance = orm()
+        print("======")
+        print(orm)
+        print("======")
         for test in tests:
-            print(orm_instance, test)
+            print("---->", test)
+            # print(orm_instance, test)
 
             orm_query = getattr(orm_instance, test)()
             analyzer_instance = orm_analyzers_mapping[orm](orm_query)
-            print(orm_query, analyzer_instance, orm_instance)
-            print("xxx", analyzer_instance.exec())
+            print(orm_query)
+            # print(analyzer_instance.exec()[0].citizen.__dict__)
+            print(analyzer_instance.query())
+
+        print("======")
 
 
 run_all_tests()
