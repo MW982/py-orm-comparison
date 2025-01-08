@@ -11,6 +11,9 @@ class BaseQueries:
     def select_with_join(self):
         raise NotImplementedError
 
+    def select_with_multiple_joins(self):
+        raise NotImplementedError
+
     def group_by(self):
         raise NotImplementedError
 

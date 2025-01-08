@@ -33,10 +33,10 @@ class SQLAlchemyQueries(BaseQueries):
         return "select(Country).where(Country.name == 'Poland').order_by(Country.founding_date)"
 
     def select_with_join(self):
-        return "select(Country).join(Area)"
+        return "select(Citizen.id, Area.name).join(Area)"
 
     def select_with_multiple_joins(self):
-        return ""
+        return "select(Country)"
 
     def group_by(self):
         return "select(Citizen, func.count(Citizen.id)).group_by(Citizen.last_name)"
